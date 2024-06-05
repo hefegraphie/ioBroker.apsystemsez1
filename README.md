@@ -7,9 +7,13 @@ This ioBroker adapter performs regular API requests to fetch data from an APsyst
 ## Features
 
 - Fetches data from an APsystems EZ1 device every configured interval.
-- Handles errors by adjusting the request interval.
+- Handles errors by adjusting the request interval to double in case of fail
+- After 2 Hours Interval is reset to configured Intervall
 - Resets to the initial interval upon successful requests.
-- Logs warnings and sets states appropriately.
+- Logs warnings and sets states appropriately, but some can be set off
+- Warning if no succesfull call could be made within 12 hours
+- Fetches DeviceInfo every 1 hour
+- ....mor to come
 
 ## Getting Started
 
