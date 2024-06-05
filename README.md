@@ -20,10 +20,10 @@ This ioBroker adapter performs regular API requests to fetch data from an APsyst
 - ioBroker installation
 
 ### Configuration
-IP: Enter the IP address of your inverter
+- IP: Enter the IP address of your inverter
 
-Frequency: Define how often you want to read out the data
+- Frequency: Define how often you want to read out the data
 
-Frequency Night: Define how often you want try to read data when APSystems EZ-1 is not reachable
+- Frequency Night: Define how often you want try to read data when APSystems EZ-1 is not reachable
 
-Warnings: Defines whether or not warnings should be output in the log
+- Warnings: Defines whether or not warnings should be output in the log
