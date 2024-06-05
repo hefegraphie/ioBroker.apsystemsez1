@@ -26,10 +26,7 @@ This ioBroker adapter performs regular API requests to fetch data from an APsyst
    ```bash
    git clone https://github.com/yourusername/apsystemsez1-adapter.git
    cd apsystemsez1-adapter
-### Options
-A simple adapter that reads data from the APSystems EZ1-M inverter and writes it to data points.
-
-Configuration:
+### Configuration:
 IP: Enter the IP address of your inverter
 
 Frequency: Define how often you want to read out the data
