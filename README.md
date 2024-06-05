@@ -1,9 +1,4 @@
-Ein einfacher Adapter, der Daten aus dem APSystems EZ1-M Wechselrichter ausliest und in Datenpunkte schreibt.
 
-Konfiguration: 
-IP: Gib die IP Adresse deines Wechselrichters an
-
-Frequenz: Definiere wie oft du die Daten auslesen möchtest.
 
 # APsystems EZ1 Data Adapter
 
@@ -24,10 +19,11 @@ This ioBroker adapter performs regular API requests to fetch data from an APsyst
 - npm (Node Package Manager)
 - ioBroker installation
 
-### Installation
+### Configuration
+- IP: Enter the IP address of your inverter
 
-1. Clone the repository:
+- Frequency: Define how often you want to read out the data
 
-   ```bash
-   git clone https://github.com/yourusername/apsystemsez1-adapter.git
-   cd apsystemsez1-adapter
+- Frequency Night: Define how often you want try to read data when APSystems EZ-1 is not reachable
+
+- Warnings: Defines whether or not warnings should be output in the log
