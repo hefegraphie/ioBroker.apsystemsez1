@@ -67,7 +67,10 @@
     },
     "native": {
         "IP": "192.168.178.",
-        "Frequenz": 60
+        "Frequenz": 60,
+        "FrequenzW": 1800,
+        "Warnungen": "X"
+
     },
     "objects": [],
     "instanceObjects": []

@@ -180,35 +180,55 @@ async function main() {
     // Or, if you really must, you can also watch all states. Don't do this if you don't need to. Otherwise this will cause a lot of unnecessary load on the system:
     // adapter.subscribeStates('*');
 
-    var Intervall;
-    Intervall = adapter.config.Frequenz * 1000
+      
+    const request = require("request");
 
-    setInterval(async () => {
-
-        require("request")('http://' + adapter.config.IP + ':8050/getOutputData', async (error, response, result) => {
-
-            try {
-                const objdata = JSON.parse(result)
-                Intervall = adapter.config.Frequenz * 1000
-                adapter.setState('EZ1-M.ertrag_channel1_livetime', objdata.data.te1)
-                adapter.setState('EZ1-M.ertrag_channel2_livetime', objdata.data.te2)
-                adapter.setState('EZ1-M.ertrag_channel1_heute', objdata.data.e1)
-                adapter.setState('EZ1-M.ertrag_channel2_heute', objdata.data.e2)
-                adapter.setState('EZ1-M.ertrag_gesamt', objdata.data.te1 + objdata.data.te2)
-                adapter.setState('EZ1-M.ertrag_heute', objdata.data.e1 + objdata.data.e2)
-                adapter.setState('EZ1-M.channel1_channel2_momentan', objdata.data.p1 + objdata.data.p2)
-                adapter.setState('EZ1-M.channel1_momentan', objdata.data.p1)
-                adapter.setState('EZ1-M.channel2_momentan', objdata.data.p2)
-            }
-            catch (error) {
-                adapter.log.warn("Keine Daten erhalten, bitte IP oder Verbindung prüfen.");
-                Intervall = 600000
-            }
-        })
-
-
-
-    }, Intervall);
+    let initialInterval = adapter.config.Frequenz; 
+    let errorInterval = adapter.config.FrequenzW; 
+    let currentInterval = initialInterval;
+    let myInterval;
+    
+    function myFunction() {
+      request('http://' + adapter.config.IP + ':8050/getOutputData', async (error, response, result) => {
+        try {
+          const objdata = JSON.parse(result);
+          
+          // Clear the existing interval to reset it
+          clearInterval(myInterval);
+          // Set the interval back to the initial interval (5 seconds)
+          myInterval = setInterval(myFunction, initialInterval);
+    
+          // Set the states with the retrieved data
+          adapter.setState('EZ1-M.ertrag_channel1_livetime', objdata.data.te1);
+          adapter.setState('EZ1-M.ertrag_channel2_livetime', objdata.data.te2);
+          adapter.setState('EZ1-M.ertrag_channel1_heute', objdata.data.e1);
+          adapter.setState('EZ1-M.ertrag_channel2_heute', objdata.data.e2);
+          adapter.setState('EZ1-M.ertrag_gesamt', objdata.data.te1 + objdata.data.te2);
+          adapter.setState('EZ1-M.ertrag_heute', objdata.data.e1 + objdata.data.e2);
+          adapter.setState('EZ1-M.channel1_channel2_momentan', objdata.data.p1 + objdata.data.p2);
+          adapter.setState('EZ1-M.channel1_momentan', objdata.data.p1);
+          adapter.setState('EZ1-M.channel2_momentan', objdata.data.p2);
+          
+        } catch (error) {
+          if (adapter.config.Warnungen) {
+            adapter.log.warn("Keine Daten erhalten, bitte IP oder Verbindung prüfen.");
+          }
+    
+          // Clear the existing interval to reset it
+          clearInterval(myInterval);
+          // Set the interval to the error interval (10 minutes)
+          myInterval = setInterval(myFunction, errorInterval);
+    
+          // Set the states to 0 in case of an error
+          adapter.setState('EZ1-M.channel1_channel2_momentan', 0);
+          adapter.setState('EZ1-M.channel1_momentan', 0);
+          adapter.setState('EZ1-M.channel2_momentan', 0);
+        }
+      });
+    }
+    
+    // Start the initial interval
+    myInterval = setInterval(myFunction, initialInterval);
 
 }
 
