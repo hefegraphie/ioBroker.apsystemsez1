@@ -33,4 +33,5 @@ Configuration:
 IP: Enter the IP address of your inverter
 
 Frequency: Define how often you want to read out the data
+
 Frequency Night: Define how often you want try to read data when APSystems EZ-1 is not reachable
