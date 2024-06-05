@@ -19,14 +19,7 @@ This ioBroker adapter performs regular API requests to fetch data from an APsyst
 - npm (Node Package Manager)
 - ioBroker installation
 
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/hefegraphie/apsystemsez1-adapter.git
-   cd apsystemsez1-adapter
-### Configuration:
+### Configuration
 IP: Enter the IP address of your inverter
 
 Frequency: Define how often you want to read out the data
