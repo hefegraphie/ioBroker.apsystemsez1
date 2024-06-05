@@ -1,0 +1,74 @@
+{
+    "common": {
+        "name": "apsystemsez1",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "首次出版"
+            }
+        },
+        "title": "apsystems-ez1",
+        "titleLang": {
+            "en": "apsystems",
+            "de": "apsystems-ez1",
+            "ru": "апсистемы",
+            "pt": "sistemas",
+            "nl": "apsystemen",
+            "fr": "apsystèmes",
+            "it": "apsystems",
+            "es": "asistemas",
+            "pl": "apsystemy",
+            "zh-cn": "应用系统公司"
+        },
+        "desc": {
+            "en": "Local API des EZ1 auslesen - unoffiziell",
+            "de": "Local API des EZ1 auslesen - unoffiziell",
+            "ru": "ап",
+            "pt": "aplicativo",
+            "nl": "ongeveer",
+            "fr": "ap",
+            "it": "ap",
+            "es": "ap",
+            "pl": "ap",
+            "zh-cn": "美联社"
+        },
+        "authors": [
+            "hefe <hainer.bauer@web.de>"
+        ],
+        "keywords": [
+            "template"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "apsystemsez1.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/hefe/ioBroker.apsystemsez1/master/admin/apsystemsez1.png",
+        "readme": "https://github.com/hefe/ioBroker.apsystemsez1/blob/master/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "general",
+        "compact": true,
+        "materialize": true,
+        "dependencies": [
+            {
+                "js-controller": ">=1.4.2"
+            }
+        ]
+    },
+    "native": {
+        "IP": "192.168.178.",
+        "Frequenz": 60
+    },
+    "objects": [],
+    "instanceObjects": []
+}
