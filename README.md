@@ -24,7 +24,7 @@ This ioBroker adapter performs regular API requests to fetch data from an APsyst
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/apsystemsez1-adapter.git
+   git clone https://github.com/hefegraphie/apsystemsez1-adapter.git
    cd apsystemsez1-adapter
 ### Configuration:
 IP: Enter the IP address of your inverter
