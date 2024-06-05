@@ -57,7 +57,7 @@ async function main() {
         Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
     */
 
-    await adapter.setObjectNotExistsAsync('EZ1-M.ertrag_channel1_livetime', {
+    await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.ertrag_channel1_livetime', {
         type: 'state',
         common: {
             name: 'ertrag_channel1_livetime',
@@ -70,7 +70,7 @@ async function main() {
         native: {},
     });
 
-    await adapter.setObjectNotExistsAsync('EZ1-M.ertrag_channel1_heute', {
+    await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.ertrag_channel1_heute', {
         type: 'state',
         common: {
             name: 'ertrag_channel1_heute',
@@ -83,7 +83,7 @@ async function main() {
         native: {},
     });
 
-    await adapter.setObjectNotExistsAsync('EZ1-M.ertrag_channel2_livetime', {
+    await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.ertrag_channel2_livetime', {
         type: 'state',
         common: {
             name: 'ertrag_channel2_livetime',
@@ -96,7 +96,7 @@ async function main() {
         native: {},
     });
 
-    await adapter.setObjectNotExistsAsync('EZ1-M.ertrag_channel2_heute', {
+    await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.ertrag_channel2_heute', {
         type: 'state',
         common: {
             name: 'ertrag_channel2_heute',
@@ -109,7 +109,7 @@ async function main() {
         native: {},
     });
 
-    await adapter.setObjectNotExistsAsync('EZ1-M.ertrag_gesamt', {
+    await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.ertrag_gesamt', {
         type: 'state',
         common: {
             name: 'ertrag_gesamt',
@@ -122,7 +122,7 @@ async function main() {
         native: {},
     });
 
-    await adapter.setObjectNotExistsAsync('EZ1-M.ertrag_heute', {
+    await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.ertrag_heute', {
         type: 'state',
         common: {
             name: 'ertrag_heute',
@@ -134,7 +134,7 @@ async function main() {
         },
         native: {},
     });
-    await adapter.setObjectNotExistsAsync('EZ1-M.channel1_channel2_momentan', {
+    await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.channel1_channel2_momentan', {
         type: 'state',
         common: {
             name: 'channel1_channel2_momentan',
@@ -147,7 +147,7 @@ async function main() {
         native: {},
     });
 
-    await adapter.setObjectNotExistsAsync('EZ1-M.channel1_momentan', {
+    await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.channel1_momentan', {
         type: 'state',
         common: {
             name: 'channel1_momentan',
@@ -160,13 +160,84 @@ async function main() {
         native: {},
     });
 
-    await adapter.setObjectNotExistsAsync('EZ1-M.channel2_momentan', {
+    await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.channel2_momentan', {
         type: 'state',
         common: {
             name: 'channel2_momentan',
             type: 'number',
             role: 'state',
             unit: 'W',
+            read: true,
+            write: true,
+        },
+        native: {},
+    });
+
+    await adapter.setObjectNotExistsAsync('EZ1-M.DeviceInfo.deviceId', {
+        type: 'state',
+        common: {
+            name: 'deviceId',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: true,
+        },
+        native: {},
+    });
+
+    await adapter.setObjectNotExistsAsync('EZ1-M.DeviceInfo.deviceVer', {
+        type: 'state',
+        common: {
+            name: 'deviceVer',
+            type: 'string',
+            role: 'state',
+
+            read: true,
+            write: true,
+        },
+        native: {},
+    });
+
+    await adapter.setObjectNotExistsAsync('EZ1-M.DeviceInfo.ssid', {
+        type: 'state',
+        common: {
+            name: 'ssid',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: true,
+        },
+        native: {},
+    });
+
+    await adapter.setObjectNotExistsAsync('EZ1-M.DeviceInfo.ipAddr', {
+        type: 'state',
+        common: {
+            name: 'ssid',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: true,
+        },
+        native: {},
+    });
+    await adapter.setObjectNotExistsAsync('EZ1-M.DeviceInfo.minPower', {
+        type: 'state',
+        common: {
+            name: 'minPower',
+            type: 'number',
+            role: 'state',
+            read: true,
+            write: true,
+        },
+        native: {},
+    });
+    await adapter.setObjectNotExistsAsync('EZ1-M.DeviceInfo.maxPower', {
+        type: 'state',
+        common: {
+            name: 'maxPower',
+            type: 'number',
+            role: 'state',
             read: true,
             write: true,
         },
@@ -181,55 +252,6 @@ async function main() {
     // adapter.subscribeStates('*');
 
 
-    // const request = require("request");
-
-    // let initialInterval = adapter.config.Frequenz * 1000; 
-    // let errorInterval = adapter.config.FrequenzW * 1000; 
-    // let currentInterval = initialInterval;
-    // let myInterval;
-
-    // function myFunction() {
-    //   request('http://' + adapter.config.IP + ':8050/getOutputData', async (error, response, result) => {
-    //     try {
-    //       const objdata = JSON.parse(result);
-
-    //       // Clear the existing interval to reset it
-    //       clearInterval(myInterval);
-    //       // Set the interval back to the initial interval (5 seconds)
-    //       myInterval = setInterval(myFunction, initialInterval);
-
-    //       // Set the states with the retrieved data
-    //       adapter.setState('EZ1-M.ertrag_channel1_livetime', objdata.data.te1);
-    //       adapter.setState('EZ1-M.ertrag_channel2_livetime', objdata.data.te2);
-    //       adapter.setState('EZ1-M.ertrag_channel1_heute', objdata.data.e1);
-    //       adapter.setState('EZ1-M.ertrag_channel2_heute', objdata.data.e2);
-    //       adapter.setState('EZ1-M.ertrag_gesamt', objdata.data.te1 + objdata.data.te2);
-    //       adapter.setState('EZ1-M.ertrag_heute', objdata.data.e1 + objdata.data.e2);
-    //       adapter.setState('EZ1-M.channel1_channel2_momentan', objdata.data.p1 + objdata.data.p2);
-    //       adapter.setState('EZ1-M.channel1_momentan', objdata.data.p1);
-    //       adapter.setState('EZ1-M.channel2_momentan', objdata.data.p2);
-
-    //     } catch (error) {
-    //       if (adapter.config.Warnungen) {
-    //         adapter.log.warn("Keine Daten erhalten, bitte IP oder Verbindung prüfen.");
-    //       }
-
-    //       // Clear the existing interval to reset it
-    //       clearInterval(myInterval);
-    //       // Set the interval to the error interval (10 minutes)
-    //       myInterval = setInterval(myFunction, errorInterval);
-
-    //       // Set the states to 0 in case of an error
-    //       adapter.setState('EZ1-M.channel1_channel2_momentan', 0);
-    //       adapter.setState('EZ1-M.channel1_momentan', 0);
-    //       adapter.setState('EZ1-M.channel2_momentan', 0);
-    //     }
-    //   });
-    // }
-
-    // // Start the initial interval
-    // myInterval = setInterval(myFunction, initialInterval);
-
 
     const request = require("request");
 
@@ -238,69 +260,107 @@ async function main() {
     let currentInterval = initialInterval;
     let myInterval;
     let lastSuccessfulRequestTime = Date.now();
-    
-    function myFunction() {
-      request('http://' + adapter.config.IP + ':8050/getOutputData', async (error, response, result) => {
-        try {
-          const objdata = JSON.parse(result);
-    
-          // Update the last successful request time
-          lastSuccessfulRequestTime = Date.now();
-    
-          // Clear the existing interval to reset it
-          clearInterval(myInterval);
-          // Set the interval back to the initial interval (5 seconds)
-          myInterval = setInterval(myFunction, initialInterval);
-    
-          // Set the states with the retrieved data
-          adapter.setState('EZ1-M.ertrag_channel1_livetime', objdata.data.te1);
-          adapter.setState('EZ1-M.ertrag_channel2_livetime', objdata.data.te2);
-          adapter.setState('EZ1-M.ertrag_channel1_heute', objdata.data.e1);
-          adapter.setState('EZ1-M.ertrag_channel2_heute', objdata.data.e2);
-          adapter.setState('EZ1-M.ertrag_gesamt', objdata.data.te1 + objdata.data.te2);
-          adapter.setState('EZ1-M.ertrag_heute', objdata.data.e1 + objdata.data.e2);
-          adapter.setState('EZ1-M.channel1_channel2_momentan', objdata.data.p1 + objdata.data.p2);
-          adapter.setState('EZ1-M.channel1_momentan', objdata.data.p1);
-          adapter.setState('EZ1-M.channel2_momentan', objdata.data.p2);
-    
-        } catch (error) {
-          if (adapter.config.Warnungen) {
-            adapter.log.warn("Keine Daten erhalten, bitte IP oder Verbindung prüfen.");
-          }
-    
-          // Clear the existing interval to reset it
-          clearInterval(myInterval);
-    
-          // Double the error interval each time it fails
-          errorInterval *= 2;
-    
-          // Reset the error interval if it exceeds 7200 seconds
-          if (errorInterval >= 7200000) {
-            errorInterval = adapter.config.FrequenzW * 1000;
-          }
-    
-          // Set the interval to the updated error interval
-          myInterval = setInterval(myFunction, errorInterval);
-    
-          // Set the states to 0 in case of an error
-          adapter.setState('EZ1-M.channel1_channel2_momentan', 0);
-          adapter.setState('EZ1-M.channel1_momentan', 0);
-          adapter.setState('EZ1-M.channel2_momentan', 0);
+
+    function leistungsdaten() {
+        request('http://' + adapter.config.IP + ':8050/getOutputData', async (error, response, result) => {
+            try {
+                const objdata = JSON.parse(result);
+
+                // Update the last successful request time
+                lastSuccessfulRequestTime = Date.now();
+
+                // Clear the existing interval to reset it
+                clearInterval(myInterval);
+                // Set the interval back to the initial interval (5 seconds)
+                myInterval = setInterval(leistungsdaten, initialInterval);
+
+                // Set the states with the retrieved data
+                adapter.setState('EZ1-M.Leistung.ertrag_channel1_livetime', objdata.data.te1);
+                adapter.setState('EZ1-M.Leistung.ertrag_channel2_livetime', objdata.data.te2);
+                adapter.setState('EZ1-M.Leistung.ertrag_channel1_heute', objdata.data.e1);
+                adapter.setState('EZ1-M.Leistung.ertrag_channel2_heute', objdata.data.e2);
+                adapter.setState('EZ1-M.Leistung.ertrag_gesamt', objdata.data.te1 + objdata.data.te2);
+                adapter.setState('EZ1-M.Leistung.ertrag_heute', objdata.data.e1 + objdata.data.e2);
+                adapter.setState('EZ1-M.Leistung.channel1_channel2_momentan', objdata.data.p1 + objdata.data.p2);
+                adapter.setState('EZ1-M.Leistung.channel1_momentan', objdata.data.p1);
+                adapter.setState('EZ1-M.Leistung.channel2_momentan', objdata.data.p2);
+
+            } catch (error) {
+                if (adapter.config.Warnungen) {
+                    adapter.log.warn("Keine Daten erhalten, bitte IP oder Verbindung prüfen.");
+                }
+
+                // Clear the existing interval to reset it
+                clearInterval(myInterval);
+
+                // Double the error interval each time it fails
+                errorInterval *= 2;
+
+                // Reset the error interval if it exceeds 7200 seconds
+                if (errorInterval >= 7200000) {
+                    errorInterval = adapter.config.FrequenzW * 1000;
+                }
+
+                // Set the interval to the updated error interval
+                myInterval = setInterval(leistungsdaten, errorInterval);
+
+                // Set the states to 0 in case of an error
+                adapter.setState('EZ1-M.Leistung.channel1_channel2_momentan', 0);
+                adapter.setState('EZ1-M.Leistung.channel1_momentan', 0);
+                adapter.setState('EZ1-M.Leistung.channel2_momentan', 0);
+            }
+        });
+
+        // Check if there have been no successful requests in the last 12 hours
+        const twelveHoursAgo = Date.now() - (12 * 60 * 60 * 1000);
+        if (lastSuccessfulRequestTime < twelveHoursAgo) {
+            if (adapter.config.Warnungen) {
+                adapter.log.warn("Es wurden in den letzten 12 Stunden keine erfolgreichen Anfragen durchgeführt.");
+            }
         }
-      });
-    
-      // Check if there have been no successful requests in the last 12 hours
-      const twelveHoursAgo = Date.now() - (12 * 60 * 60 * 1000);
-      if (lastSuccessfulRequestTime < twelveHoursAgo) {
-        if (adapter.config.Warnungen) {
-          adapter.log.warn("Es wurden in den letzten 12 Stunden keine erfolgreichen Anfragen durchgeführt.");
-        }
-      }
     }
-    
+
     // Start the initial interval
-    myInterval = setInterval(myFunction, initialInterval);
-    
+    myInterval = setInterval(leistungsdaten, initialInterval);
+
+    function deviceinfo() {
+        request('http://' + adapter.config.IP + ':8050/getDeviceInfo', async (error, response, result) => {
+            try {
+                const objdata = JSON.parse(result);
+
+                // Update the last successful request time
+                lastSuccessfulRequestTime = Date.now();
+
+                // Clear the existing interval to reset it
+
+                // Set the states with the retrieved data
+                adapter.setState('EZ1-M.DeviceInfo.deviceId', objdata.data.deviceId);
+                adapter.setState('EZ1-M.DeviceInfo.deviceVer', objdata.data.devVer);
+                adapter.setState('EZ1-M.DeviceInfo.ssid', objdata.data.ssid);
+                adapter.setState('EZ1-M.DeviceInfo.ipAddr', objdata.data.ipAddr);
+                adapter.setState('EZ1-M.DeviceInfo.minPower',  objdata.data.minPower);
+                adapter.setState('EZ1-M.DeviceInfo.maxPower',  objdata.data.maxPower);
+
+            } catch (error) {
+                if (adapter.config.Warnungen) {
+                    adapter.log.warn("Keine Daten erhalten, bitte IP oder Verbindung prüfen.");
+                }
+            }
+        });
+
+        // Check if there have been no successful requests in the last 12 hours
+        const twelveHoursAgo = Date.now() - (12 * 60 * 60 * 1000);
+        if (lastSuccessfulRequestTime < twelveHoursAgo) {
+            adapter.log.warn("Es wurden in den letzten 12 Stunden keine erfolgreichen Anfragen durchgeführt.");
+        }
+    }
+
+    // Start the initial interval
+    deviceinfo();
+    myInterval = setInterval(deviceinfo, 3600 * 1000);
+
+
+
 }
 
 // @ts-ignore parent is a valid property on module
