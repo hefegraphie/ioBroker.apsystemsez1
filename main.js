@@ -160,6 +160,8 @@ async function main() {
         native: {},
     });
 
+    
+
     await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.channel2_momentan', {
         type: 'state',
         common: {
