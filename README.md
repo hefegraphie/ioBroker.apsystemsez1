@@ -29,5 +29,7 @@ This ioBroker adapter performs regular API requests to fetch data from an APsyst
 - Frequency: Define how often you want to read out the data
 
 - Frequency Night: Define how often you want try to read data when APSystems EZ-1 is not reachable
+    -   Doubles Interval after every failed Call
+    -   Resets it, if it exeeds 3h. Starts to double again, etc. etc.
 
 - Warnings: Defines whether or not warnings should be output in the log
