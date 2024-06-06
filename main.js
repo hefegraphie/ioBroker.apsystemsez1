@@ -259,6 +259,7 @@ async function main() {
     let errorInterval = adapter.config.FrequenzW * 1000;
     let currentInterval = initialInterval;
     let myInterval;
+    let myIntervalD;
     let lastSuccessfulRequestTime = Date.now();
 
     function leistungsdaten() {
@@ -357,7 +358,7 @@ async function main() {
 
     // Start the initial interval
     deviceinfo();
-    myInterval = setInterval(deviceinfo, 3600 * 1000);
+    myIntervalD = setInterval(deviceinfo, 3600 * 1000);
 
 
 
