@@ -42,7 +42,7 @@
             "zh-cn": "美联社"
         },
         "authors": [
-            "hefe <github@hefegraphie.de>"
+            "hefegraphie <github@hefegraphie.de>"
         ],
         "keywords": [
             "template"
@@ -52,8 +52,8 @@
         "main": "main.js",
         "icon": "apsystemsez1.png",
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/hefe/ioBroker.apsystemsez1/master/admin/apsystemsez1.png",
-        "readme": "https://github.com/hefe/ioBroker.apsystemsez1/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/hefegraphie/ioBroker.apsystemsez1/master/admin/apsystemsez1.png",
+        "readme": "https://github.com/hefegraphie/ioBroker.apsystemsez1/blob/master/README.md",
         "loglevel": "info",
         "mode": "daemon",
         "type": "general",

@@ -343,7 +343,7 @@ async function main() {
 
             } catch (error) {
                 if (adapter.config.Warnungen) {
-                    adapter.log.warn("Keine Daten erhalten, bitte IP oder Verbindung prüfen.");
+                    adapter.log.warn("Keine Devicedaten, bitte IP oder Verbindung prüfen.");
                 }
             }
         });
