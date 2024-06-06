@@ -1,11 +1,11 @@
 {
     "common": {
         "name": "apsystemsez1",
-        "version": "0.0.1",
+        "version": "0.0.3",
         "news": {
-            "0.0.1": {
+            "0.0.3": {
                 "en": "initial release",
-                "de": "Erstveröffentlichung",
+                "de": "Alpha",
                 "ru": "Начальная версия",
                 "pt": "lançamento inicial",
                 "nl": "Eerste uitgave",
