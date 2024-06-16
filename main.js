@@ -216,7 +216,7 @@ async function main() {
         type: 'state',
         common: {
             name: 'minPower',
-            type: 'number',
+            type: 'string',
             role: 'state',
             read: true,
             write: true,
@@ -227,7 +227,7 @@ async function main() {
         type: 'state',
         common: {
             name: 'maxPower',
-            type: 'number',
+            type: 'string',
             role: 'state',
             read: true,
             write: true,
