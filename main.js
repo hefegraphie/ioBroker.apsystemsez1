@@ -204,7 +204,7 @@ async function main() {
     await adapter.setObjectNotExistsAsync('EZ1-M.DeviceInfo.ipAddr', {
         type: 'state',
         common: {
-            name: 'ssid',
+            name: 'ipAddr',
             type: 'string',
             role: 'state',
             read: true,
