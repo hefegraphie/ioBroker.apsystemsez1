@@ -257,6 +257,7 @@ async function main() {
                 myInterval = setInterval(leistungsdaten, initialInterval);
 
                 // Set the states with the retrieved data
+                if (typeof objdata !== "undefined"){
                 adapter.setState('EZ1-M.Leistung.ertrag_channel1_livetime', objdata.data.te1);
                 adapter.setState('EZ1-M.Leistung.ertrag_channel2_livetime', objdata.data.te2);
                 adapter.setState('EZ1-M.Leistung.ertrag_channel1_heute', objdata.data.e1);
@@ -266,7 +267,7 @@ async function main() {
                 adapter.setState('EZ1-M.Leistung.channel1_channel2_momentan', objdata.data.p1 + objdata.data.p2);
                 adapter.setState('EZ1-M.Leistung.channel1_momentan', objdata.data.p1);
                 adapter.setState('EZ1-M.Leistung.channel2_momentan', objdata.data.p2);
-
+                }
             } catch (error) {
                 if (adapter.config.Warnungen) {
                     adapter.log.warn("Keine Daten erhalten, bitte IP oder Verbindung prüfen.");
@@ -308,7 +309,7 @@ async function main() {
     function deviceinfo() {
         request('http://' + adapter.config.IP + ':8050/getDeviceInfo', async (error, response, result) => {
             try {
-                const objdata = JSON.parse(result);
+                const objdatadev = JSON.parse(result);
 
                 // Update the last successful request time
                 lastSuccessfulRequestTime = Date.now();
@@ -316,13 +317,14 @@ async function main() {
                 // Clear the existing interval to reset it
 
                 // Set the states with the retrieved data
-                adapter.setState('EZ1-M.DeviceInfo.deviceId', objdata.data.deviceId);
-                adapter.setState('EZ1-M.DeviceInfo.deviceVer', objdata.data.devVer);
-                adapter.setState('EZ1-M.DeviceInfo.ssid', objdata.data.ssid);
-                adapter.setState('EZ1-M.DeviceInfo.ipAddr', objdata.data.ipAddr);
-                adapter.setState('EZ1-M.DeviceInfo.minPower',  objdata.data.minPower);
-                adapter.setState('EZ1-M.DeviceInfo.maxPower',  objdata.data.maxPower);
-
+                if (typeof objdatadev !== "undefined"){
+                adapter.setState('EZ1-M.DeviceInfo.deviceId', objdatadev.data.deviceId);
+                adapter.setState('EZ1-M.DeviceInfo.deviceVer', objdatadev.data.devVer);
+                adapter.setState('EZ1-M.DeviceInfo.ssid', objdatadev.data.ssid);
+                adapter.setState('EZ1-M.DeviceInfo.ipAddr', objdatadev.data.ipAddr);
+                adapter.setState('EZ1-M.DeviceInfo.minPower',  objdatadev.data.minPower);
+                adapter.setState('EZ1-M.DeviceInfo.maxPower',  objdatadev.data.maxPower);
+                }
             } catch (error) {
                 if (adapter.config.Warnungen) {
                     adapter.log.warn("Keine Devicedaten, bitte IP oder Verbindung prüfen.");
