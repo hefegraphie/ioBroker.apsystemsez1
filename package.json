@@ -1,6 +1,6 @@
 {
   "name": "iobroker.apsystemsez1",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Local API des EZ1 auslesen - unoffiziell",
   "author": {
     "name": "hefe",

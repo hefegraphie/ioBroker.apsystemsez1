@@ -275,13 +275,14 @@ async function main() {
 
                 // Clear the existing interval to reset it
                 clearInterval(myInterval);
-
+                if (adapter.config.DoppelInterval) {
                 // Double the error interval each time it fails
                 errorInterval *= 2;
 
                 // Reset the error interval if it exceeds 7200 seconds
                 if (errorInterval >= 7200000) {
                     errorInterval = adapter.config.FrequenzW * 1000;
+                }
                 }
 
                 // Set the interval to the updated error interval

@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "apsystemsez1",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "news": {
             "0.0.4": {
                 "en": "initial release",
@@ -69,7 +69,8 @@
         "IP": "192.168.178.",
         "Frequenz": 60,
         "FrequenzW": 1800,
-        "Warnungen": "X"
+        "Warnungen": "X",
+        "DoppelInterval": "X"
 
     },
     "objects": [],
