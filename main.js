@@ -257,17 +257,35 @@ async function main() {
                 myInterval = setInterval(leistungsdaten, initialInterval);
 
                 // Set the states with the retrieved data
-                if (typeof objdata !== "undefined"){
-                adapter.setState('EZ1-M.Leistung.ertrag_channel1_livetime', objdata.data.te1);
-                adapter.setState('EZ1-M.Leistung.ertrag_channel2_livetime', objdata.data.te2);
-                adapter.setState('EZ1-M.Leistung.ertrag_channel1_heute', objdata.data.e1);
-                adapter.setState('EZ1-M.Leistung.ertrag_channel2_heute', objdata.data.e2);
-                adapter.setState('EZ1-M.Leistung.ertrag_gesamt', objdata.data.te1 + objdata.data.te2);
-                adapter.setState('EZ1-M.Leistung.ertrag_heute', objdata.data.e1 + objdata.data.e2);
-                adapter.setState('EZ1-M.Leistung.channel1_channel2_momentan', objdata.data.p1 + objdata.data.p2);
-                adapter.setState('EZ1-M.Leistung.channel1_momentan', objdata.data.p1);
-                adapter.setState('EZ1-M.Leistung.channel2_momentan', objdata.data.p2);
+              if (typeof objdata !== "undefined") {
+                if (objdata.data.te1 !== undefined) {
+                    adapter.setState('EZ1-M.Leistung.ertrag_channel1_livetime', objdata.data.te1);
                 }
+                if (objdata.data.te2 !== undefined) {
+                    adapter.setState('EZ1-M.Leistung.ertrag_channel2_livetime', objdata.data.te2);
+                }
+                if (objdata.data.e1 !== undefined) {
+                    adapter.setState('EZ1-M.Leistung.ertrag_channel1_heute', objdata.data.e1);
+                }
+                if (objdata.data.e2 !== undefined) {
+                    adapter.setState('EZ1-M.Leistung.ertrag_channel2_heute', objdata.data.e2);
+                }
+                if (objdata.data.te1 !== undefined && objdata.data.te2 !== undefined) {
+                    adapter.setState('EZ1-M.Leistung.ertrag_gesamt', objdata.data.te1 + objdata.data.te2);
+                }
+                if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
+                    adapter.setState('EZ1-M.Leistung.ertrag_heute', objdata.data.e1 + objdata.data.e2);
+                }
+                if (objdata.data.p1 !== undefined && objdata.data.p2 !== undefined) {
+                    adapter.setState('EZ1-M.Leistung.channel1_channel2_momentan', objdata.data.p1 + objdata.data.p2);
+                }
+                if (objdata.data.p1 !== undefined) {
+                    adapter.setState('EZ1-M.Leistung.channel1_momentan', objdata.data.p1);
+                }
+                if (objdata.data.p2 !== undefined) {
+                    adapter.setState('EZ1-M.Leistung.channel2_momentan', objdata.data.p2);
+                }
+            }
             } catch (error) {
                 if (adapter.config.Warnungen) {
                     adapter.log.warn("Keine Daten erhalten, bitte IP oder Verbindung prüfen.");
