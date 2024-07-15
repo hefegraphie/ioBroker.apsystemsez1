@@ -361,6 +361,22 @@ async function main() {
     // Start the initial interval
     deviceinfo();
     myIntervalD = setInterval(deviceinfo, 3600 * 1000);
+ // SSet the Max Power
+ myInterval = setInterval(leistungsdaten, initialInterval);
+ function setmaxoutput() { 
+     request('http://' + adapter.config.IP + ':8050/setMaxPower?p=' + adapter.config.MaxPower, async (error, response, result) => {
+         try {
+             const setdata = JSON.parse(result);
+             if (typeof setdata !== "undefined") {
+                 adapter.log.info("Maximaler Output auf " + setdata.data.maxPower + " gesetzt");
+             }
+         } catch (error) {
+             adapter.log.error("Konnte maximalen Output nicht setzen");
+         }
+     })
+ }
+ 
+if (adapter.config.MaxPower != '0') {setmaxoutput() };
 
 
 

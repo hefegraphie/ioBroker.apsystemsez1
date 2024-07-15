@@ -1,9 +1,9 @@
 {
     "common": {
         "name": "apsystemsez1",
-        "version": "0.0.5",
+        "version": "0.0.6",
         "news": {
-            "0.0.4": {
+            "0.0.6": {
                 "en": "initial release",
                 "de": "Alpha",
                 "ru": "Начальная версия",
@@ -70,7 +70,8 @@
         "Frequenz": 60,
         "FrequenzW": 1800,
         "Warnungen": "X",
-        "DoppelInterval": "X"
+        "DoppelInterval": "X",
+        "MaxPower": "0"
 
     },
     "objects": [],
