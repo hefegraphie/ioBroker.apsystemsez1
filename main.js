@@ -151,7 +151,7 @@ async function main() {
         },
         native: {},
     });
-   await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.channel2_momentan', {
+    await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.channel2_momentan', {
         type: 'state',
         common: {
             name: 'channel2_momentan',
@@ -234,6 +234,17 @@ async function main() {
         },
         native: {},
     });
+    await adapter.setObjectNotExistsAsync('EZ1-M.Set.maxPower', {
+        type: 'state',
+        common: {
+            name: 'maxPower',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: true,
+        },
+        native: {},
+    });
 
     const request = require("request");
 
@@ -257,35 +268,35 @@ async function main() {
                 myInterval = setInterval(leistungsdaten, initialInterval);
 
                 // Set the states with the retrieved data
-              if (typeof objdata !== "undefined") {
-                if (objdata.data.te1 !== undefined) {
-                    adapter.setState('EZ1-M.Leistung.ertrag_channel1_livetime', objdata.data.te1);
+                if (typeof objdata !== "undefined") {
+                    if (objdata.data.te1 !== undefined) {
+                        adapter.setState('EZ1-M.Leistung.ertrag_channel1_livetime', objdata.data.te1);
+                    }
+                    if (objdata.data.te2 !== undefined) {
+                        adapter.setState('EZ1-M.Leistung.ertrag_channel2_livetime', objdata.data.te2);
+                    }
+                    if (objdata.data.e1 !== undefined) {
+                        adapter.setState('EZ1-M.Leistung.ertrag_channel1_heute', objdata.data.e1);
+                    }
+                    if (objdata.data.e2 !== undefined) {
+                        adapter.setState('EZ1-M.Leistung.ertrag_channel2_heute', objdata.data.e2);
+                    }
+                    if (objdata.data.te1 !== undefined && objdata.data.te2 !== undefined) {
+                        adapter.setState('EZ1-M.Leistung.ertrag_gesamt', objdata.data.te1 + objdata.data.te2);
+                    }
+                    if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
+                        adapter.setState('EZ1-M.Leistung.ertrag_heute', objdata.data.e1 + objdata.data.e2);
+                    }
+                    if (objdata.data.p1 !== undefined && objdata.data.p2 !== undefined) {
+                        adapter.setState('EZ1-M.Leistung.channel1_channel2_momentan', objdata.data.p1 + objdata.data.p2);
+                    }
+                    if (objdata.data.p1 !== undefined) {
+                        adapter.setState('EZ1-M.Leistung.channel1_momentan', objdata.data.p1);
+                    }
+                    if (objdata.data.p2 !== undefined) {
+                        adapter.setState('EZ1-M.Leistung.channel2_momentan', objdata.data.p2);
+                    }
                 }
-                if (objdata.data.te2 !== undefined) {
-                    adapter.setState('EZ1-M.Leistung.ertrag_channel2_livetime', objdata.data.te2);
-                }
-                if (objdata.data.e1 !== undefined) {
-                    adapter.setState('EZ1-M.Leistung.ertrag_channel1_heute', objdata.data.e1);
-                }
-                if (objdata.data.e2 !== undefined) {
-                    adapter.setState('EZ1-M.Leistung.ertrag_channel2_heute', objdata.data.e2);
-                }
-                if (objdata.data.te1 !== undefined && objdata.data.te2 !== undefined) {
-                    adapter.setState('EZ1-M.Leistung.ertrag_gesamt', objdata.data.te1 + objdata.data.te2);
-                }
-                if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
-                    adapter.setState('EZ1-M.Leistung.ertrag_heute', objdata.data.e1 + objdata.data.e2);
-                }
-                if (objdata.data.p1 !== undefined && objdata.data.p2 !== undefined) {
-                    adapter.setState('EZ1-M.Leistung.channel1_channel2_momentan', objdata.data.p1 + objdata.data.p2);
-                }
-                if (objdata.data.p1 !== undefined) {
-                    adapter.setState('EZ1-M.Leistung.channel1_momentan', objdata.data.p1);
-                }
-                if (objdata.data.p2 !== undefined) {
-                    adapter.setState('EZ1-M.Leistung.channel2_momentan', objdata.data.p2);
-                }
-            }
             } catch (error) {
                 if (adapter.config.Warnungen) {
                     adapter.log.warn("Keine Daten erhalten, bitte IP oder Verbindung prüfen.");
@@ -294,13 +305,13 @@ async function main() {
                 // Clear the existing interval to reset it
                 clearInterval(myInterval);
                 if (adapter.config.DoppelInterval) {
-                // Double the error interval each time it fails
-                errorInterval *= 2;
+                    // Double the error interval each time it fails
+                    errorInterval *= 2;
 
-                // Reset the error interval if it exceeds 7200 seconds
-                if (errorInterval >= 7200000) {
-                    errorInterval = adapter.config.FrequenzW * 1000;
-                }
+                    // Reset the error interval if it exceeds 7200 seconds
+                    if (errorInterval >= 7200000) {
+                        errorInterval = adapter.config.FrequenzW * 1000;
+                    }
                 }
 
                 // Set the interval to the updated error interval
@@ -336,13 +347,13 @@ async function main() {
                 // Clear the existing interval to reset it
 
                 // Set the states with the retrieved data
-                if (typeof objdatadev !== "undefined"){
-                adapter.setState('EZ1-M.DeviceInfo.deviceId', objdatadev.data.deviceId);
-                adapter.setState('EZ1-M.DeviceInfo.deviceVer', objdatadev.data.devVer);
-                adapter.setState('EZ1-M.DeviceInfo.ssid', objdatadev.data.ssid);
-                adapter.setState('EZ1-M.DeviceInfo.ipAddr', objdatadev.data.ipAddr);
-                adapter.setState('EZ1-M.DeviceInfo.minPower',  objdatadev.data.minPower);
-                adapter.setState('EZ1-M.DeviceInfo.maxPower',  objdatadev.data.maxPower);
+                if (typeof objdatadev !== "undefined") {
+                    adapter.setState('EZ1-M.DeviceInfo.deviceId', objdatadev.data.deviceId);
+                    adapter.setState('EZ1-M.DeviceInfo.deviceVer', objdatadev.data.devVer);
+                    adapter.setState('EZ1-M.DeviceInfo.ssid', objdatadev.data.ssid);
+                    adapter.setState('EZ1-M.DeviceInfo.ipAddr', objdatadev.data.ipAddr);
+                    adapter.setState('EZ1-M.DeviceInfo.minPower', objdatadev.data.minPower);
+                    adapter.setState('EZ1-M.DeviceInfo.maxPower', objdatadev.data.maxPower);
                 }
             } catch (error) {
                 if (adapter.config.Warnungen) {
@@ -361,26 +372,42 @@ async function main() {
     // Start the initial interval
     deviceinfo();
     myIntervalD = setInterval(deviceinfo, 3600 * 1000);
- // SSet the Max Power
- myInterval = setInterval(leistungsdaten, initialInterval);
- function setmaxoutput() { 
-     request('http://' + adapter.config.IP + ':8050/setMaxPower?p=' + adapter.config.MaxPower, async (error, response, result) => {
-         try {
-             const setdata = JSON.parse(result);
-             if (typeof setdata !== "undefined") {
-                 adapter.log.info("Maximaler Output auf " + setdata.data.maxPower + " gesetzt");
-             }
-         } catch (error) {
-             adapter.log.error("Konnte maximalen Output nicht setzen");
-         }
-     })
- }
- 
-if (adapter.config.MaxPower != '0') {setmaxoutput() };
+
+    // SSet the Max Power
+    myInterval = setInterval(leistungsdaten, initialInterval);
+
+    adapter.subscribeStates("*");
+    if (adapter.config.MaxPower != '0') {
+        adapter.setState('EZ1-M.Set.maxPower', adapter.config.MaxPower);
+    };
+
+        adapter.on('stateChange', function (id, state) {
+
+            if (id == 'apsystemsez1.0.EZ1-M.Set.maxPower') {
+
+                adapter.getState('EZ1-M.Set.maxPower', function (err, state) {
+
+
+                    request('http://' + adapter.config.IP + ':8050/setMaxPower?p=' + state?.val, async (error, response, result) => {
+                        try {
+                            const setdata = JSON.parse(result);
+                            if (typeof setdata !== "undefined") {
+                                adapter.log.info("Maximaler Output auf " + setdata.data.maxPower + " gesetzt");
+                            }
+                        } catch (error) {
+                            adapter.log.error("Konnte maximalen Output nicht setzen");
+                        }
+                    })
+                }
+                )
+            }
+        }
+        )
 
 
 
 }
+
 
 // @ts-ignore parent is a valid property on module
 if (module.parent) {
