@@ -270,31 +270,49 @@ async function main() {
                 // Set the states with the retrieved data
                 if (typeof objdata !== "undefined") {
                     if (objdata.data.te1 !== undefined) {
-                        adapter.setState('EZ1-M.Leistung.ertrag_channel1_livetime', objdata.data.te1);
+                        adapter.setState('EZ1-M.Leistung.ertrag_channel1_livetime', objdata.data.te1, true);
                     }
                     if (objdata.data.te2 !== undefined) {
-                        adapter.setState('EZ1-M.Leistung.ertrag_channel2_livetime', objdata.data.te2);
-                    }
-                    if (objdata.data.e1 !== undefined) {
-                        adapter.setState('EZ1-M.Leistung.ertrag_channel1_heute', objdata.data.e1);
-                    }
-                    if (objdata.data.e2 !== undefined) {
-                        adapter.setState('EZ1-M.Leistung.ertrag_channel2_heute', objdata.data.e2);
+                        adapter.setState('EZ1-M.Leistung.ertrag_channel2_livetime', objdata.data.te2, true);
                     }
                     if (objdata.data.te1 !== undefined && objdata.data.te2 !== undefined) {
-                        adapter.setState('EZ1-M.Leistung.ertrag_gesamt', objdata.data.te1 + objdata.data.te2);
+                        adapter.setState('EZ1-M.Leistung.ertrag_gesamt', objdata.data.te1 + objdata.data.te2, true);
                     }
-                    if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
-                        adapter.setState('EZ1-M.Leistung.ertrag_heute', objdata.data.e1 + objdata.data.e2);
-                    }
+// Helper function to calculate milliseconds until midnight
+function getMillisUntilMidnight() {
+    const now = new Date();
+    const midnight = new Date();
+    midnight.setHours(24, 0, 0, 0);
+    return midnight.getTime() - now.getTime();
+}
+
+
+if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
+    const value1 = objdata.data.e1;
+    const value2 = objdata.data.e2;
+
+    if (value1 === 0 && value2 === 0) {
+        // Schedule the state update at midnight if values are 0
+        setTimeout(() => {
+            adapter.setState('EZ1-M.Leistung.ertrag_channel1_heute', value1, true);
+            adapter.setState('EZ1-M.Leistung.ertrag_channel2_heute', value2, true);
+            adapter.setState('EZ1-M.Leistung.ertrag_heute', value1 + value2, true);
+        }, getMillisUntilMidnight());
+    } else {
+        // Update states immediately if values are not 0
+        adapter.setState('EZ1-M.Leistung.ertrag_channel1_heute', value1, true);
+        adapter.setState('EZ1-M.Leistung.ertrag_channel2_heute', value2, true);
+        adapter.setState('EZ1-M.Leistung.ertrag_heute', value1 + value2, true);
+    }
+}
                     if (objdata.data.p1 !== undefined && objdata.data.p2 !== undefined) {
-                        adapter.setState('EZ1-M.Leistung.channel1_channel2_momentan', objdata.data.p1 + objdata.data.p2);
+                        adapter.setState('EZ1-M.Leistung.channel1_channel2_momentan', objdata.data.p1 + objdata.data.p2, true);
                     }
                     if (objdata.data.p1 !== undefined) {
-                        adapter.setState('EZ1-M.Leistung.channel1_momentan', objdata.data.p1);
+                        adapter.setState('EZ1-M.Leistung.channel1_momentan', objdata.data.p1, true);
                     }
                     if (objdata.data.p2 !== undefined) {
-                        adapter.setState('EZ1-M.Leistung.channel2_momentan', objdata.data.p2);
+                        adapter.setState('EZ1-M.Leistung.channel2_momentan', objdata.data.p2, true);
                     }
                 }
             } catch (error) {
