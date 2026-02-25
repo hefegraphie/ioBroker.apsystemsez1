@@ -120,6 +120,23 @@
                     </div>
                 </div>
                 <div class="row">
+                <div class="col s12 m12">
+                    <p><strong>Hinweis zum AP Systems Bug:</strong><br>
+                        Die offizielle Firmware des Wechselrichters hat einen bekannten Fehler: Sobald ein Kanal 540 kWh erreicht, springt er auf 0 zurück.<br>
+                        Dieser Fehler liegt in der Hardware/App von AP Systems, <em>nicht</em> in ioBroker oder diesem Adapter. <br>
+                        Mehr Infos dazu findest du hier: <a href="https://homematic-forum.de/forum/viewtopic.php?f=47&t=87237" target="_blank">Homematic Forum - AP Systems Bug. <br>
+                        Dies ist ein Counter, wie oft das bereits passiert ist. Falls dein Wechselrichter neu ist, lass ihn auf 0. <br>
+                        Ansonsten füge den Wert hier ein. Wenn du 2 eingibst wird der korrigierte Gesamtertrag um 1080 erhöht (2 * 540).</a>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 m4 input-field">
+                    <input type="number" class="value" id="setbackCount" value="0" />
+                    <label for="setbackCount" class="translate">Anzahl der 540kWh Resets (Manuelle Korrektur)</label>
+                </div>
+</div>
+                <div class="row">
                     <!-- extra settings -->
                     <div id="tab-extras" class="col s12 page">
                         <div class="col s12 m6 input-field">
