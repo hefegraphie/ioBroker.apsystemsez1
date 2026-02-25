@@ -245,6 +245,30 @@ async function main() {
         },
         native: {},
     });
+    await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.ertrag_korrigiert', {
+    type: 'state',
+    common: {
+        name: 'Ertrag Gesamtkorrigiert',
+        type: 'number',
+        role: 'value.power.production',
+        unit: 'kWh',
+        read: true,
+        write: false, // write: false ist besser für reine Sensorwerte
+    },
+    native: {},
+});
+
+await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.ertrag_setback_count', {
+    type: 'state',
+    common: {
+        name: 'Anzahl der 540kWh Resets',
+        type: 'number',
+        role: 'value',
+        read: true,
+        write: true, // write: true, damit Nutzer ihn bei Bedarf resetten können
+    },
+    native: {},
+});
 
     const request = require("request");
 
@@ -253,6 +277,8 @@ async function main() {
     let myInterval;
     let myIntervalD;
     let lastSuccessfulRequestTime = Date.now();
+    let lastErtragChannel1 = null;
+    let lastErtragChannel2 = null;
 
     function leistungsdaten() {
         request('http://' + adapter.config.IP + ':8050/getOutputData', async (error, response, result) => {
@@ -275,9 +301,46 @@ async function main() {
                     if (objdata.data.te2 !== undefined) {
                         adapter.setState('EZ1-M.Leistung.ertrag_channel2_livetime', objdata.data.te2, true);
                     }
-                    if (objdata.data.te1 !== undefined && objdata.data.te2 !== undefined) {
-                        adapter.setState('EZ1-M.Leistung.ertrag_gesamt', objdata.data.te1 + objdata.data.te2, true);
+                if (objdata.data.te1 !== undefined && objdata.data.te2 !== undefined) {
+                    let currentTe1 = objdata.data.te1;
+                    let currentTe2 = objdata.data.te2;
+                    
+                    // Normalen unkorrigierten Wert schreiben (für die Historie/Fehlersuche gut zu haben)
+                    adapter.setState('EZ1-M.Leistung.ertrag_gesamt', currentTe1 + currentTe2, true);
+                
+                    // 1. Aktuellen Counter-Stand aus ioBroker holen
+                    let stateCount = await adapter.getStateAsync('EZ1-M.Leistung.ertrag_setback_count');
+                    let setbackCount = stateCount ? (stateCount.val || 0) : 0;
+                    let countChanged = false;
+                
+                    // 2. Prüfen ob Channel 1 abgerutscht ist (Vergleich mit vorherigem Request)
+                    if (lastErtragChannel1 !== null && currentTe1 < (lastErtragChannel1 - 500)) {
+                        setbackCount++;
+                        countChanged = true;
+                        adapter.log.info(`Bug erkannt auf Kanal 1: Wert fiel von ${lastErtragChannel1} auf ${currentTe1}. Erhöhe Setback-Counter.`);
                     }
+                
+                    // 3. Prüfen ob Channel 2 abgerutscht ist
+                    if (lastErtragChannel2 !== null && currentTe2 < (lastErtragChannel2 - 500)) {
+                        setbackCount++;
+                        countChanged = true;
+                        adapter.log.info(`Bug erkannt auf Kanal 2: Wert fiel von ${lastErtragChannel2} auf ${currentTe2}. Erhöhe Setback-Counter.`);
+                    }
+                
+                    // 4. Wenn Counter erhöht wurde, neuen Wert in ioBroker schreiben
+                    if (countChanged) {
+                        adapter.setState('EZ1-M.Leistung.ertrag_setback_count', setbackCount, true);
+                    }
+                
+                    // 5. Korrigierten Gesamtwert berechnen und schreiben
+                    let korrigierterWert = currentTe1 + currentTe2 + (setbackCount * 540);
+                    adapter.setState('EZ1-M.Leistung.ertrag_korrigiert', korrigierterWert, true);
+                
+                    // 6. Aktuelle Werte für den nächsten Durchlauf merken
+                    lastErtragChannel1 = currentTe1;
+                    lastErtragChannel2 = currentTe2;
+                }
+
 // Helper function to calculate milliseconds until midnight
 function getMillisUntilMidnight() {
     const now = new Date();
