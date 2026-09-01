@@ -61,3 +61,5 @@ If you reinstall the adapter or the automatic detection missed a reset (e.g. dur
 > Example: Channel 1 has reset once and Channel 2 has reset once → set the counter to `2`.
 
 The corrected value in `ertrag_korrigiert` will update automatically on the next data fetch.
+
+[Older changelogs can be found there](CHANGELOG_OLD.md)
