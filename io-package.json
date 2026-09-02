@@ -55,6 +55,7 @@
         "extIcon": "https://raw.githubusercontent.com/hefegraphie/ioBroker.apsystemsez1/master/admin/apsystemsez1.png",
         "readme": "https://github.com/hefegraphie/ioBroker.apsystemsez1/blob/master/README.md",
         "loglevel": "info",
+        "tier": 2,
         "mode": "daemon",
         "type": "general",
         "compact": true,
