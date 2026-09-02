@@ -16,7 +16,7 @@
     "url": "https://github.com/hefegraphie/ioBroker.apsystemsez1"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.1.5"
+    "@iobroker/adapter-core": "^3.4.3"
   },
   "devDependencies": {
     "@iobroker/testing": "^4.1.3",
