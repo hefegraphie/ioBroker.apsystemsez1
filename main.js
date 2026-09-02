@@ -270,9 +270,7 @@ await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.ertrag_setback_count', {
     native: {},
 });
 
-    const request = require("request");
-
-    let initialInterval = adapter.config.Frequenz * 1000;
+     let initialInterval = adapter.config.Frequenz * 1000;
     let errorInterval = adapter.config.FrequenzW * 1000;
     let myInterval;
     let myIntervalD;
@@ -280,10 +278,11 @@ await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.ertrag_setback_count', {
     let lastErtragChannel1 = null;
     let lastErtragChannel2 = null;
 
-    function leistungsdaten() {
-        request('http://' + adapter.config.IP + ':8050/getOutputData', async (error, response, result) => {
-            try {
-                const objdata = JSON.parse(result);
+    async function leistungsdaten() {
+        try {
+            const response = await fetch('http://' + adapter.config.IP + ':8050/getOutputData');
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            const objdata = await response.json();
 
                 // Update the last successful request time
                 lastSuccessfulRequestTime = Date.now();
@@ -403,7 +402,6 @@ if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
                 adapter.setState('EZ1-M.Leistung.channel1_momentan', 0);
                 adapter.setState('EZ1-M.Leistung.channel2_momentan', 0);
             }
-        });
 
         // Check if there have been no successful requests in the last 12 hours
         const twelveHoursAgo = Date.now() - (12 * 60 * 60 * 1000);
@@ -417,10 +415,11 @@ if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
     // Start the initial interval
     myInterval = adapter.setInterval(leistungsdaten, initialInterval);
 
-    function deviceinfo() {
-        request('http://' + adapter.config.IP + ':8050/getDeviceInfo', async (error, response, result) => {
-            try {
-                const objdatadev = JSON.parse(result);
+    async function deviceinfo() {
+        try {
+            const response = await fetch('http://' + adapter.config.IP + ':8050/getDeviceInfo');
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            const objdatadev = await response.json();
 
                 // Update the last successful request time
                 lastSuccessfulRequestTime = Date.now();
@@ -441,7 +440,6 @@ if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
                     adapter.log.warn("Keine Devicedaten, bitte IP oder Verbindung prüfen.");
                 }
             }
-        });
 
         // Check if there have been no successful requests in the last 12 hours
         const twelveHoursAgo = Date.now() - (12 * 60 * 60 * 1000);
@@ -469,16 +467,18 @@ if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
                 adapter.getState('EZ1-M.Set.maxPower', function (err, state) {
 
 
-                    request('http://' + adapter.config.IP + ':8050/setMaxPower?p=' + state?.val, async (error, response, result) => {
+                    (async () => {
                         try {
-                            const setdata = JSON.parse(result);
+                            const response = await fetch('http://' + adapter.config.IP + ':8050/setMaxPower?p=' + state?.val);
+                            if (!response.ok) throw new Error('HTTP ' + response.status);
+                            const setdata = await response.json();
                             if (typeof setdata !== "undefined") {
                                 adapter.log.info("Maximaler Output auf " + setdata.data.maxPower + " gesetzt");
                             }
                         } catch (error) {
                             adapter.log.error("Konnte maximalen Output nicht setzen");
                         }
-                    })
+                    })()
                 }
                 )
             }

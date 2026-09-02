@@ -12,3 +12,4 @@ src-admin/
 Thumbs.db
 *.tgz
 *.zip
+.commitinfo
