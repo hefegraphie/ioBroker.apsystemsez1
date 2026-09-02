@@ -13,7 +13,8 @@
                 "it": "Versione iniziale",
                 "es": "Versión inicial",
                 "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版"
+                "zh-cn": "首次出版",
+                "uk": "початковий випуск"
             }
         },
         "titleLang": {
@@ -26,25 +27,30 @@
             "it": "apsystems",
             "es": "asistemas",
             "pl": "apsystemy",
-            "zh-cn": "应用系统公司"
+            "zh-cn": "应用系统公司",
+            "uk": "APSsystems EZ1"
         },
         "desc": {
             "en": "Local API des EZ1 auslesen - unoffiziell",
             "de": "Local API des EZ1 auslesen - unoffiziell",
-            "ru": "ап",
-            "pt": "aplicativo",
-            "nl": "ongeveer",
-            "fr": "ap",
-            "it": "ap",
-            "es": "ap",
-            "pl": "ap",
-            "zh-cn": "美联社"
+            "ru": "Чтение локального API EZ1 - неофициально",
+            "pt": "Leitura da API local do EZ1 - não oficial",
+            "nl": "Lokale API van EZ1 uitlezen - onofficieel",
+            "fr": "Lecture de l'API locale de l'EZ1 - non officiel",
+            "it": "Lettura API locale dell'EZ1 - non ufficiale",
+            "es": "Lectura de la API local del EZ1 - no oficial",
+            "pl": "Odczyt lokalnego API EZ1 - nieoficjalny",
+            "zh-cn": "读取EZ1本地API - 非官方",
+            "uk": "Читання локального API EZ1 - неофіційно"
         },
         "authors": [
             "hefegraphie <github@hefegraphie.de>"
         ],
         "keywords": [
-            "template"
+            "apsystems",
+            "ez1",
+            "solar",
+            "inverter"
         ],
         "licenseInformation": {
             "type": "free",
@@ -60,6 +66,8 @@
         "mode": "daemon",
         "type": "general",
         "compact": true,
+        "connectionType": "local",
+        "dataSource": "poll",
         "adminUI": {
             "config": "materialize"
         },

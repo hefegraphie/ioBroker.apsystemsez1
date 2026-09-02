@@ -1,0 +1,14 @@
+node_modules/
+npm-debug.log*
+build/
+src-admin/
+*.js.map
+*.ts.map
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+*.tgz
+*.zip

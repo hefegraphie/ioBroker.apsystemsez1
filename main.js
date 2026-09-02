@@ -289,9 +289,9 @@ await adapter.setObjectNotExistsAsync('EZ1-M.Leistung.ertrag_setback_count', {
                 lastSuccessfulRequestTime = Date.now();
 
                 // Clear the existing interval to reset it
-                clearInterval(myInterval);
+                adapter.clearInterval(myInterval);
                 // Set the interval back to the initial interval (5 seconds)
-                myInterval = setInterval(leistungsdaten, initialInterval);
+                myInterval = adapter.setInterval(leistungsdaten, initialInterval);
 
                 // Set the states with the retrieved data
                 if (typeof objdata !== "undefined") {
@@ -356,7 +356,7 @@ if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
 
     if (value1 === 0 && value2 === 0) {
         // Schedule the state update at midnight if values are 0
-        setTimeout(() => {
+        adapter.setTimeout(() => {
             adapter.setState('EZ1-M.Leistung.ertrag_channel1_heute', value1, true);
             adapter.setState('EZ1-M.Leistung.ertrag_channel2_heute', value2, true);
             adapter.setState('EZ1-M.Leistung.ertrag_heute', value1 + value2, true);
@@ -384,7 +384,7 @@ if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
                 }
 
                 // Clear the existing interval to reset it
-                clearInterval(myInterval);
+                adapter.clearInterval(myInterval);
                 if (adapter.config.DoppelInterval) {
                     // Double the error interval each time it fails
                     errorInterval *= 2;
@@ -396,7 +396,7 @@ if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
                 }
 
                 // Set the interval to the updated error interval
-                myInterval = setInterval(leistungsdaten, errorInterval);
+                myInterval = adapter.setInterval(leistungsdaten, errorInterval);
 
                 // Set the states to 0 in case of an error
                 adapter.setState('EZ1-M.Leistung.channel1_channel2_momentan', 0);
@@ -415,7 +415,7 @@ if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
     }
 
     // Start the initial interval
-    myInterval = setInterval(leistungsdaten, initialInterval);
+    myInterval = adapter.setInterval(leistungsdaten, initialInterval);
 
     function deviceinfo() {
         request('http://' + adapter.config.IP + ':8050/getDeviceInfo', async (error, response, result) => {
@@ -452,10 +452,10 @@ if (objdata.data.e1 !== undefined && objdata.data.e2 !== undefined) {
 
     // Start the initial interval
     deviceinfo();
-    myIntervalD = setInterval(deviceinfo, 3600 * 1000);
+    myIntervalD = adapter.setInterval(deviceinfo, 3600 * 1000);
 
-    // SSet the Max Power
-    myInterval = setInterval(leistungsdaten, initialInterval);
+    // Set the Max Power
+    myInterval = adapter.setInterval(leistungsdaten, initialInterval);
 
     adapter.subscribeStates("*");
     if (adapter.config.MaxPower != '0') {
