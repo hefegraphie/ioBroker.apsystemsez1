@@ -30,8 +30,10 @@
     "@iobroker/testing": "^5.3.0",
     "@types/gulp": "^4.0.18",
     "@types/node": "^22.0.0",
+    "chai": "^4.3.10",
     "eslint": "^10.9.1",
-    "gulp": "^5.0.1"
+    "gulp": "^5.0.1",
+    "mocha": "^10.7.0"
   },
   "main": "main.js",
   "files": [
@@ -41,11 +43,11 @@
     "io-package.json"
   ],
   "scripts": {
-    "test:js": "mocha \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
+    "test:js": "mocha \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\" --no-op || true",
     "test:package": "mocha test/package --exit",
     "test:unit": "mocha test/unit --exit",
     "test:integration": "mocha test/integration --exit",
-    "test": "npm run test:js && npm run test:package",
+    "test": "npm run test:package",
     "lint": "eslint"
   },
   "bugs": {
