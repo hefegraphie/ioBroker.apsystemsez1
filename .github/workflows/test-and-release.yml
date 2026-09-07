@@ -49,25 +49,4 @@ jobs:
           node-version: ${{ matrix.node-version }}
           os: ${{ matrix.os }}
 
-  # Deploys the final package to NPM
-  deploy:
-    needs: [check-and-lint, adapter-tests]
-
-    # Trigger this step only when a commit on any branch is tagged with a version number
-    if: |
-      contains(github.event.head_commit.message, '[skip ci]') == false &&
-      github.event_name == 'push' &&
-      startsWith(github.ref, 'refs/tags/v')
-
-    runs-on: ubuntu-latest
-
-    # Required permissions for trusted publishing
-    permissions:
-      contents: write
-      id-token: write
-
-    steps:
-      - uses: ioBroker/testing-action-deploy@v1
-        with:
-          node-version: '24.x'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+  # No deploy job — GitHub-only adapter, no npm publish

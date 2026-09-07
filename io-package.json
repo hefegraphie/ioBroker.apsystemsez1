@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "apsystemsez1",
-        "version": "0.0.7",
+        "version": "0.1.1",
         "news": {
+            "0.1.1": {
+                "en": "Fix repository checker issues, remove npm deploy",
+                "de": "Repository-Checker-Fehler behoben, npm Deploy entfernt",
+                "ru": "Исправлены ошибки проверки репозитория, удалён npm deploy",
+                "pt": "Corrigidos erros do verificador de repositório, removido npm deploy",
+                "nl": "Repository-checker-fouten opgelost, npm deploy verwijderd",
+                "fr": "Correction des erreurs du vérificateur de dépôt, suppression du déploiement npm",
+                "it": "Corretti errori del controllo repository, rimosso deploy npm",
+                "es": "Corregidos errores del verificador de repositorio, eliminado deploy npm",
+                "pl": "Naprawiono błędy sprawdzania repozytorium, usunięto wdrożenie npm",
+                "zh-cn": "修复仓库检查器问题，移除 npm 部署",
+                "uk": "Виправлено помилки перевірки репозиторію, видалено npm deploy"
+            },
             "0.0.7": {
                 "en": "initial release",
                 "de": "Alpha",
