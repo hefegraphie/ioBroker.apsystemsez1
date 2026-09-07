@@ -66,6 +66,15 @@ The corrected value in `ertrag_korrigiert` will update automatically on the next
 
 ## Changelog
 
+### 0.1.3 (2026-09-07)
+* (hefe) Fix admin globalDependency version requirement
+
+### 0.1.2 (2026-09-07)
+* (hefe) Fix engines.node for Node 20 compatibility
+
+### 0.1.1 (2026-09-07)
+* (hefe) Fix repository checker issues, remove npm deploy
+
 ### 0.0.7 (2024-10-24)
 * (hefe) initial release
 
