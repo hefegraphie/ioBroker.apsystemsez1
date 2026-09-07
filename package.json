@@ -1,6 +1,6 @@
 {
   "name": "iobroker.apsystemsez1",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Local API des EZ1 auslesen - unoffiziell",
   "author": {
     "name": "hefe",
@@ -21,7 +21,7 @@
     "url": "https://github.com/hefegraphie/ioBroker.apsystemsez1"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.4.3"

@@ -1,108 +1,121 @@
 {
-    "common": {
-        "name": "apsystemsez1",
-        "version": "0.1.1",
-        "news": {
-            "0.1.1": {
-                "en": "Fix repository checker issues, remove npm deploy",
-                "de": "Repository-Checker-Fehler behoben, npm Deploy entfernt",
-                "ru": "Исправлены ошибки проверки репозитория, удалён npm deploy",
-                "pt": "Corrigidos erros do verificador de repositório, removido npm deploy",
-                "nl": "Repository-checker-fouten opgelost, npm deploy verwijderd",
-                "fr": "Correction des erreurs du vérificateur de dépôt, suppression du déploiement npm",
-                "it": "Corretti errori del controllo repository, rimosso deploy npm",
-                "es": "Corregidos errores del verificador de repositorio, eliminado deploy npm",
-                "pl": "Naprawiono błędy sprawdzania repozytorium, usunięto wdrożenie npm",
-                "zh-cn": "修复仓库检查器问题，移除 npm 部署",
-                "uk": "Виправлено помилки перевірки репозиторію, видалено npm deploy"
-            },
-            "0.0.7": {
-                "en": "initial release",
-                "de": "Alpha",
-                "ru": "Начальная версия",
-                "pt": "lançamento inicial",
-                "nl": "Eerste uitgave",
-                "fr": "Première version",
-                "it": "Versione iniziale",
-                "es": "Versión inicial",
-                "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版",
-                "uk": "початковий випуск"
-            }
-        },
-        "titleLang": {
-            "en": "apsystems",
-            "de": "apsystems-ez1",
-            "ru": "апсистемы",
-            "pt": "sistemas",
-            "nl": "apsystemen",
-            "fr": "apsystèmes",
-            "it": "apsystems",
-            "es": "asistemas",
-            "pl": "apsystemy",
-            "zh-cn": "应用系统公司",
-            "uk": "APSsystems EZ1"
-        },
-        "desc": {
-            "en": "Local API des EZ1 auslesen - unoffiziell",
-            "de": "Local API des EZ1 auslesen - unoffiziell",
-            "ru": "Чтение локального API EZ1 - неофициально",
-            "pt": "Leitura da API local do EZ1 - não oficial",
-            "nl": "Lokale API van EZ1 uitlezen - onofficieel",
-            "fr": "Lecture de l'API locale de l'EZ1 - non officiel",
-            "it": "Lettura API locale dell'EZ1 - non ufficiale",
-            "es": "Lectura de la API local del EZ1 - no oficial",
-            "pl": "Odczyt lokalnego API EZ1 - nieoficjalny",
-            "zh-cn": "读取EZ1本地API - 非官方",
-            "uk": "Читання локального API EZ1 - неофіційно"
-        },
-        "authors": [
-            "hefegraphie <github@hefegraphie.de>"
-        ],
-        "keywords": [
-            "apsystems",
-            "ez1",
-            "solar",
-            "inverter"
-        ],
-        "licenseInformation": {
-            "type": "free",
-            "license": "MIT"
-        },
-        "platform": "Javascript/Node.js",
-        "icon": "apsystemsez1.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/hefegraphie/ioBroker.apsystemsez1/master/admin/apsystemsez1.png",
-        "readme": "https://github.com/hefegraphie/ioBroker.apsystemsez1/blob/master/README.md",
-        "loglevel": "info",
-        "tier": 2,
-        "mode": "daemon",
-        "type": "general",
-        "compact": true,
-        "connectionType": "local",
-        "dataSource": "poll",
-        "adminUI": {
-            "config": "materialize"
-        },
-        "dependencies": [
-            {
-                "js-controller": ">=6.0.11"
-            }
-        ],
-        "globalDependencies": [
-            {
-                "admin": ">=7.8.23"
-            }
-        ]
+  "common": {
+    "name": "apsystemsez1",
+    "version": "0.1.2",
+    "news": {
+      "0.1.2": {
+        "en": "Fix engines.node for Node 20 compatibility",
+        "de": "engines.node auf Node 20 Kompatibilität gefixt",
+        "ru": "Исправлена совместимость engines.node с Node 20",
+        "pt": "Corrigido engines.node para compatibilidade com Node 20",
+        "nl": "engines.node gefixt voor Node 20 compatibiliteit",
+        "fr": "Correction engines.node pour compatibilité Node 20",
+        "it": "Riparato engines.node per compatibilità Node 20",
+        "es": "Corregido engines.node para compatibilidad con Node 20",
+        "pl": "Naprawiono engines.node dla kompatybilności z Node 20",
+        "zh-cn": "修复 engines.node 以兼容 Node 20",
+        "uk": "Виправлено engines.node для сумісності з Node 20"
+      },
+      "0.1.1": {
+        "en": "Fix repository checker issues, remove npm deploy",
+        "de": "Repository-Checker-Fehler behoben, npm Deploy entfernt",
+        "ru": "Исправлены ошибки проверки репозитория, удалён npm deploy",
+        "pt": "Corrigidos erros do verificador de repositório, removido npm deploy",
+        "nl": "Repository-checker-fouten opgelost, npm deploy verwijderd",
+        "fr": "Correction des erreurs du vérificateur de dépôt, suppression du déploiement npm",
+        "it": "Corretti errori del controllo repository, rimosso deploy npm",
+        "es": "Corregidos errores del verificador de repositorio, eliminado deploy npm",
+        "pl": "Naprawiono błędy sprawdzania repozytorium, usunięto wdrożenie npm",
+        "zh-cn": "修复仓库检查器问题，移除 npm 部署",
+        "uk": "Виправлено помилки перевірки репозиторію, видалено npm deploy"
+      },
+      "0.0.7": {
+        "en": "initial release",
+        "de": "Alpha",
+        "ru": "Начальная версия",
+        "pt": "lançamento inicial",
+        "nl": "Eerste uitgave",
+        "fr": "Première version",
+        "it": "Versione iniziale",
+        "es": "Versión inicial",
+        "pl": "Pierwsze wydanie",
+        "zh-cn": "首次出版",
+        "uk": "початковий випуск"
+      }
     },
-    "native": {
-        "IP": "192.168.178.",
-        "Frequenz": 60,
-        "FrequenzW": 1800,
-        "Warnungen": "X",
-        "DoppelInterval": "X",
-        "MaxPower": "0"
+    "titleLang": {
+      "en": "apsystems",
+      "de": "apsystems-ez1",
+      "ru": "апсистемы",
+      "pt": "sistemas",
+      "nl": "apsystemen",
+      "fr": "apsystèmes",
+      "it": "apsystems",
+      "es": "asistemas",
+      "pl": "apsystemy",
+      "zh-cn": "应用系统公司",
+      "uk": "APSsystems EZ1"
     },
-    "objects": [],
-    "instanceObjects": []
+    "desc": {
+      "en": "Local API des EZ1 auslesen - unoffiziell",
+      "de": "Local API des EZ1 auslesen - unoffiziell",
+      "ru": "Чтение локального API EZ1 - неофициально",
+      "pt": "Leitura da API local do EZ1 - não oficial",
+      "nl": "Lokale API van EZ1 uitlezen - onofficieel",
+      "fr": "Lecture de l'API locale de l'EZ1 - non officiel",
+      "it": "Lettura API locale dell'EZ1 - non ufficiale",
+      "es": "Lectura de la API local del EZ1 - no oficial",
+      "pl": "Odczyt lokalnego API EZ1 - nieoficjalny",
+      "zh-cn": "读取EZ1本地API - 非官方",
+      "uk": "Читання локального API EZ1 - неофіційно"
+    },
+    "authors": [
+      "hefegraphie <github@hefegraphie.de>"
+    ],
+    "keywords": [
+      "apsystems",
+      "ez1",
+      "solar",
+      "inverter"
+    ],
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
+    "platform": "Javascript/Node.js",
+    "icon": "apsystemsez1.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/hefegraphie/ioBroker.apsystemsez1/master/admin/apsystemsez1.png",
+    "readme": "https://github.com/hefegraphie/ioBroker.apsystemsez1/blob/master/README.md",
+    "loglevel": "info",
+    "tier": 2,
+    "mode": "daemon",
+    "type": "general",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "adminUI": {
+      "config": "materialize"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=6.0.11"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=7.8.23"
+      }
+    ]
+  },
+  "native": {
+    "IP": "192.168.178.",
+    "Frequenz": 60,
+    "FrequenzW": 1800,
+    "Warnungen": "X",
+    "DoppelInterval": "X",
+    "MaxPower": "0"
+  },
+  "objects": [],
+  "instanceObjects": []
 }
